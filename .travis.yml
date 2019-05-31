@@ -9,14 +9,14 @@ before_install:
 
 script:
   - |
-    docker run --rm -it -v $(pwd):/terraform \
+    docker run --rm -it -v $(pwd)/examples:/terraform -v $(pwd)/modules:/modules \
     -e ZENDESK_ACCOUNT=$ZENDESK_ACCOUNT \
     -e ZENDESK_EMAIL=$ZENDESK_EMAIL \
     -e ZENDESK_TOKEN=$ZENDESK_TOKEN \
     $DOCKER_IMAGE init
 
   - |
-    docker run --rm -it -v $(pwd):/terraform \
+    docker run --rm -it -v $(pwd)/examples:/terraform -v $(pwd)/modules:/modules \
     -e ZENDESK_ACCOUNT=$ZENDESK_ACCOUNT \
     -e ZENDESK_EMAIL=$ZENDESK_EMAIL \
     -e ZENDESK_TOKEN=$ZENDESK_TOKEN \
