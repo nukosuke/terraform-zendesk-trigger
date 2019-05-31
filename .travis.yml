@@ -1,0 +1,23 @@
+services:
+  - docker
+
+env:
+  - DOCKER_IMAGE=nukosuke/terraform-provider-zendesk
+
+before_install:
+  - docker pull $DOCKER_IMAGE
+
+script:
+  - |
+    docker run --rm -it -v $(pwd):/terraform \
+    -e ZENDESK_ACCOUNT=$ZENDESK_ACCOUNT \
+    -e ZENDESK_EMAIL=$ZENDESK_EMAIL \
+    -e ZENDESK_TOKEN=$ZENDESK_TOKEN \
+    $DOCKER_IMAGE init
+
+  - |
+    docker run --rm -it -v $(pwd):/terraform \
+    -e ZENDESK_ACCOUNT=$ZENDESK_ACCOUNT \
+    -e ZENDESK_EMAIL=$ZENDESK_EMAIL \
+    -e ZENDESK_TOKEN=$ZENDESK_TOKEN \
+    $DOCKER_IMAGE plan
