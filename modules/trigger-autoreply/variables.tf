@@ -4,7 +4,6 @@ variable "title" {
 }
 
 variable "active" {
-  type    = "bool"
   default = true
 }
 
