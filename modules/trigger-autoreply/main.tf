@@ -22,12 +22,6 @@ resource "zendesk_trigger" "trigger-autoreply" {
 
   action {
     field = "notification_user"
-    value = <<ENVELOPE
-[
-  "requester_id",
-  "${var.subject}",
-  "${var.body}"
-]
-ENVELOPE
+    value = "${jsonencode(list("requester_id", var.subject, var.body))}"
   }
 }
