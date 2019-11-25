@@ -7,8 +7,7 @@ resource "zendesk_ticket_field" "turn-counter" {
 # 1st inbound
 #
 resource "zendesk_trigger" "trigger_first_turn" {
-  position = "${var.start_position}"
-  title    = "Add tag: [Turn 1]"
+  title = "Add tag: [Turn 1]"
 
   all {
     field    = "update_type"
@@ -32,8 +31,8 @@ resource "zendesk_trigger" "trigger_first_turn" {
 # 2 ~ Nth inbound
 #
 resource "zendesk_trigger" "trigger_turn" {
-  count    = "${var.max_count - 1}"
-  position = "${var.start_position + 1 + count.index}"
+  count    = var.max_count - 1
+  position = var.start_position + 1 + count.index
   title    = "Change tag: [Turn ${count.index + 1} (REPLIED)] -> [Turn ${count.index + 2}${count.index == var.max_count - 2 ? "+" : ""}]"
 
   all {
@@ -70,8 +69,7 @@ resource "zendesk_trigger" "trigger_turn" {
 # 1 ~ N-1th outbound (REPLIED)
 #
 resource "zendesk_trigger" "turn-replied" {
-  count    = "${var.max_count - 1}"
-  position = "${var.start_position + var.max_count + count.index}"
+  count    = var.max_count - 1
   title    = "Change tag: [Turn ${count.index + 1}] -> [Turn ${count.index + 1} (REPLIED)]"
 
   all {
