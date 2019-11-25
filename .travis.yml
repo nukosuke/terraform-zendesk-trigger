@@ -8,6 +8,7 @@ env:
     - DOCKER_IMAGE=nukosuke/terraform-provider-zendesk
   matrix:
     - MODULE=trigger-autoreply
+    - MODULE=trigger-turn-counter
 
 before_install:
   - docker pull $DOCKER_IMAGE
