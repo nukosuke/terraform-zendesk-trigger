@@ -1,6 +1,6 @@
 resource "zendesk_trigger" "trigger-autoreply" {
-  title  = "${var.title}"
-  active = "${var.active}"
+  title  = var.title
+  active = var.active
 
   all {
     field    = "role"
@@ -22,6 +22,10 @@ resource "zendesk_trigger" "trigger-autoreply" {
 
   action {
     field = "notification_user"
-    value = "${jsonencode(list("requester_id", var.subject, var.body))}"
+    value = jsonencode([
+      "requester_id",
+      var.subject,
+      var.body
+    ])
   }
 }

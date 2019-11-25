@@ -1,5 +1,5 @@
 variable "title" {
-  type    = "string"
+  type    = string
   default = "Auto Reply"
 }
 
@@ -8,9 +8,9 @@ variable "active" {
 }
 
 variable "subject" {
-  type = "string"
+  type = string
 }
 
 variable "body" {
-  type = "string"
+  type = string
 }
