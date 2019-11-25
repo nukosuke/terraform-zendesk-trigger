@@ -31,9 +31,8 @@ resource "zendesk_trigger" "trigger_first_turn" {
 # 2 ~ Nth inbound
 #
 resource "zendesk_trigger" "trigger_turn" {
-  count    = var.max_count - 1
-  position = var.start_position + 1 + count.index
-  title    = "Change tag: [Turn ${count.index + 1} (REPLIED)] -> [Turn ${count.index + 2}${count.index == var.max_count - 2 ? "+" : ""}]"
+  count = var.max_count - 1
+  title = "Change tag: [Turn ${count.index + 1} (REPLIED)] -> [Turn ${count.index + 2}${count.index == var.max_count - 2 ? "+" : ""}]"
 
   all {
     field    = "update_type"
